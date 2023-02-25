@@ -40,3 +40,9 @@ limit 10;
 SELECT type, title, duration, listed_in
 FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
 WHERE TYPE = 'Movie' AND duration = '205 min';
+
+--Inner join;
+SELECT cast.netflix_people, director.netlfix_people, title.netflix_titles_info
+FROM "CharlotteChaze/BreakIntoTech"."netflix_people"
+    INNER JOIN "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+    ON show_id.netlfix_people = show_id.netflix.titles_info; 
