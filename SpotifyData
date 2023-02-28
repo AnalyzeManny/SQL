@@ -1,0 +1,47 @@
+# SQL
+SQL Portfolio
+-- SPotifyData
+
+SELECT * FROM Spotifydata; 
+
+SELECT * FROM Spotifydata
+WHERE artist_name = 'Bad Bunny';
+
+--  Determine who the Top 10 artists are by popularity
+SELECT artist_name, popularity, track_name
+FROM Spotifydata
+ORDER BY popularity desc
+LIMIT 10; 
+
+-- Determine who the Top 10 least popularity artsist;
+SELECT artist_name, popularity, track_name
+FROM Spotifydata
+ORDER BY popularity
+LIMIT 10; 
+
+--Determine the avg popularity, danceability, 
+--and energy by artist and track. 
+SELECT artist_name, track_name,
+AVG(popularity),
+AVG(danceability),
+AVG(energy)
+FROM spotifydata
+GROUP BY artist_name, track_name
+LIMIT 10; 
+
+-- --Determine the MIN danceability, 
+--and energy by artist and track. 
+SELECT artist_name, track_name,
+danceability,
+energy
+FROM Spotifydata
+GROUP BY artist_name, track_name
+ORDER BY danceability, energy
+LIMIT 10; 
+
+--Artist multiple times on list
+SELECT artist_name,
+    COUNT(artist_name) AS times_on_list
+FROM Spotifydata
+GROUP BY artist_name
+HAVING COUNT (*) > 1;
