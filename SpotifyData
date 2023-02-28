@@ -39,7 +39,7 @@ GROUP BY artist_name, track_name
 ORDER BY danceability, energy
 LIMIT 10; 
 
---Artist multiple times on list
+--Artist on list more than once. 
 SELECT artist_name,
     COUNT(artist_name) AS times_on_list
 FROM Spotifydata
