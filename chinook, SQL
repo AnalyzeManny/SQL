@@ -35,13 +35,19 @@ FROM invoices
     ON invoices.CustomerId = employees.EmployeeId
     INNER JOIN customers
     ON customers.customerID = invoices.customerID
-WHERE title = 'Sales Support Agent'; 
+WHERE title = 'Sales Support Agent'
+GROUP BY invoices.InvoiceId;
 
 --7, Show the Invoice Total, Customer name, Country, and Sales Agent name 
 --for all invoices and customers.
-
-SELECT total, firtsname, lastname, 
-    employee.firstname, employee.lastname
+SELECT EMPLOYEES.firstname, lastname, customerid, employees.Title,
+    invoicedate, supportrepID, customers.LastName,
+    SUM(total)
 FROM invoices
-    INNER JOIN customers 
-    ON customers.CustomerId = invoices.CustomerId
+    INNER JOIN employees 
+    ON invoices.CustomerId = employees.EmployeeId
+    INNER JOIN customers
+    ON customers.customerID = invoices.customerID
+WHERE title = 'Sales Support Agent'
+GROUP BY invoices.Total, customers.LastName
+ORDER BY total desc;
