@@ -51,3 +51,53 @@ FROM invoices
 WHERE title = 'Sales Support Agent'
 GROUP BY invoices.Total, customers.LastName
 ORDER BY total desc;
+
+--8, How many Invoices were there in 2009?
+SELECT COUNT (invoicedate) AS INVOICES_IN_2009
+FROM invoices 
+WHERE invoicedate LIKE '%2009%';
+
+--9, What are the total sales for 2009?
+SELECT SUM(total) AS total_sales 
+FROM INVOICES
+WHERE invoicedate LIKE '%2009%';
+
+--10, Write a query that includes the purchased track name 
+--with each invoice line ID.
+SELECT invoice_items.InvoiceId, tracks.Name
+FROM invoice_items
+    JOIN TRACKS
+    ON invoice_items.TrackId = tracks.TrackId;
+
+--11, Write a query that includes the purchased track name 
+--AND artist name with each invoice line ID.   
+
+SELECT invoice_items.InvoiceId, tracks.Name, 
+    tracks.Composer
+FROM invoice_items
+    JOIN TRACKS
+    ON invoice_items.TrackId = tracks.TrackId; 
+
+--11, Provide a query that shows all the Tracks, and include the Album name,
+-- Media type, and Genre.
+SELECT tracks.Name, tracks.Composer, tracks.GenreId
+FROM tracks
+    JOIN media_types
+    ON tracks.MediaTypeId = media_types.MediaTypeId;
+    
+--12, Show the total sales made by each sales agent.
+SELECT employees.FirstName, employees.LastName,
+    SUM(TOTAL) AS TOTAL_SALES
+FROM employees 
+    JOIN invoices 
+    ON employees.EmployeeId = invoices.CustomerId
+GROUP BY title; 
+
+--Which sales agent made the most dollars in sales in 2009?
+SELECT employees.FirstName, employees.LastName,
+    SUM(TOTAL) AS TOTAL_SALES
+FROM employees 
+    JOIN invoices 
+    ON employees.EmployeeId = invoices.CustomerId
+WHERE invoicedate LIKE '%2009%'
+LIMIT 1; 
