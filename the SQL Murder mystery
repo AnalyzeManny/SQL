@@ -1,0 +1,35 @@
+--CATCHING THE PERSON BEHIND THE MURDER--
+
+SELECT name, transcript 
+FROM interview
+	 JOIN get_fit_now_member
+	 ON interview.person_id = get_fit_now_member.person_id
+WHERE name = 'Jeremy Bowers'
+
+-- I was hired by a woman with a lot of money. I don't know her name but 
+I know she's around 5'5" (65") or 5'7" (67"). She has red hair and she drives a Tesla Model S. 
+I know that she attended the SQL Symphony Concert 3 times in December 2017.--
+
+SELECT name, gender, car_make, car_model, hair_color, height
+FROM drivers_license
+	JOIN person
+	ON person.license_id = drivers_license.id
+WHERE gender = 'female' AND car_make = 'Tesla' AND hair_color = 'red' 
+
+--name	gender	car_make	car_model	hair_color	height
+Red Korb	female	Tesla	Model S	red	65
+Regina George	female	Tesla	Model S	red	66
+Miranda Priestly	female	Tesla	Model S	red	66---
+
+SELECT name, event_name, date,
+	COUNT (name) times_attended
+FROM facebook_event_checkin
+	join person
+	On facebook_event_checkin.person_id = person.id
+WHERE date like '201712%' and event_name like 'SQL%' 
+GROUP BY name
+HAVING times_attended = 3
+
+--name	event_name	date	times_attended
+Bryan Pardo	SQL Symphony Concert	20171224	3
+Miranda Priestly	SQL Symphony Concert	20171229	3--
